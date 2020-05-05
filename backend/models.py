@@ -27,4 +27,15 @@ class Message(models.Model):
 
     def __unicode__(self):
         return self.situation.name
+    
+    def __str__(self) :
+        return self.message_sentence
 
+class Comment(models.Model):
+    message_id = models.ForeignKey(Message, models.CASCADE, related_name='comments')
+    message_comment = models.CharField(max_length=255)
+    comment_sender = models.CharField(max_length=255, null=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.message_comment
